@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # Database
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - ./env/db.env
+    networks:
+      - wpsite
+
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - wpsite
+
+  # Wordpress
+  wordpress:
+    depends_on:
+      - db
+    build:
+      context: ./backend
+      dockerfile: docker/dev/Dockerfile
+    ports:
+      - '8000:80'
+    restart: always
+    volumes:
+      - ./:/var/www/html
+    env_file:
+      - ./env/wp.env
+    networks:
+      - wpsite
+
+  # Nuxt
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: docker/dev/Dockerfile
+    command: npm run dev
+    ports:
+      - 3000:3000
+    environment:
+      HOST: 0.0.0.0
+    networks:
+      - wpsite
+
+networks:
+  wpsite:
+volumes:
+  db_data:
