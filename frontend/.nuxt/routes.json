@@ -2,8 +2,8 @@
   {
     "name": "index",
     "path": "/",
-    "component": "/home/monster/app/wedding-house-v7/frontend/pages/index.vue",
+    "component": "/var/www/nuxtpress-app/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_a1b67e20"
+    "_name": "_4dd805ea"
   }
 ]

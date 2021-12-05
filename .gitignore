@@ -6,7 +6,7 @@
 # Nuxt build
 .nuxt
 
-node_modules/
+/frontend/node_modules
 
 # Nuxt generate
 dist
@@ -16,29 +16,29 @@ dist
 #
 # Note: if you want to stage/commit WP core files
 # you can delete this whole section/until Configuration.
-/wp-admin/
-/wp-content/index.php
-/wp-content/languages
-/wp-content/plugins/index.php
-/wp-content/themes/index.php
-/wp-includes/
-/index.php
-/license.txt
-/readme.html
-/wp-*.php
-/xmlrpc.php
+/backend/wp-admin/
+/backend/wp-content/index.php
+/backend/wp-content/languages
+/backend/wp-content/plugins/index.php
+/backend/wp-content/themes/index.php
+/backend/wp-includes/
+/backend/index.php
+/backend/license.txt
+/backend/readme.html
+/backend/wp-*.php
+/backend/xmlrpc.php
 
 # Configuration
-wp-config.php
+/backend/wp-config.php
 
 # Example themes
-/wp-content/themes/twenty*/
+/backend/wp-content/themes/twenty*/
 
 # Example plugin
-/wp-content/plugins/hello.php
+/backend/wp-content/plugins/hello.php
 
 # Uploads
-/wp-content/uploads/
+/backend/wp-content/uploads/
 
 # Log files
 *.log
