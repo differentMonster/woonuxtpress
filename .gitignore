@@ -6,6 +6,8 @@
 # Nuxt build
 .nuxt
 
+node_modules/
+
 # Nuxt generate
 dist
 
