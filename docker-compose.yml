@@ -28,22 +28,23 @@ services:
 
   # Wordpress
   wordpress:
+    image: wordpress:5.7.1-php7.4-apache
     depends_on:
       - db
-    build:
-      context: ./backend
-      dockerfile: docker/dev/Dockerfile
+    # build:
+    #   context: ./backend
+    #   dockerfile: docker/dev/Dockerfile
     ports:
       - '8000:80'
     restart: always
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/html/backend/
     env_file:
       - ./env/wp.env
     networks:
       - wpsite
 
-  # Nuxt
+  # Nuxt 2
   frontend:
     build:
       context: ./frontend
