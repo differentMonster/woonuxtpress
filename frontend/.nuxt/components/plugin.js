@@ -1,7 +1,9 @@
 import Vue from 'vue'
 
 const components = {
-  Logo: () => import('../../components/Logo.vue' /* webpackChunkName: "components/logo" */).then(c => c.default || c)
+  APostItem: () => import('../../components/APostItem.vue' /* webpackChunkName: "components/apost-item" */).then(c => c.default || c),
+  Logo: () => import('../../components/Logo.vue' /* webpackChunkName: "components/logo" */).then(c => c.default || c),
+  PostItem: () => import('../../components/PostItem.vue' /* webpackChunkName: "components/post-item" */).then(c => c.default || c)
 }
 
 for (const name in components) {

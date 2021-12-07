@@ -22,8 +22,37 @@
 # Backend [ wordpress ]
 
 # Logs
-* TODO [0/0] dockerlization front and backend
+* DONE [0/0] dockerlization front and backend
+  CLOSED: [2021-12-08 Wed 00:59]
   - Note taken on [2021-12-06 Mon 01:28] \\
-    - [ ] connect both using Restful API
+    - [X] axios return wp-json/v2 Restful API
     - [X] environment setup
-  - follow up by docker setting database location, networks sharing
+  - follow up by fetch restful api post from wordpress
+  - axios work but $axios.get didt [ fix ]
+  - $wp return by pages and posts, using fetch
+  - wordpress page set are successfully
+
+* TODO testout $wp, create, post, detele, update
+  - Note taken on [2021-12-08 Wed 05:14] \\
+    - block-renderer
+    - blocks
+    - categories
+    - comments
+    - cpt
+    - frontPage
+    - media
+    - menu
+    - options
+    - pages
+    - search
+    - settings
+    - slug
+    - statuses
+    - tags
+    - taxonomies
+    - taxonomy
+    - themes
+    - types
+    - users
+    - _ns
+    - options

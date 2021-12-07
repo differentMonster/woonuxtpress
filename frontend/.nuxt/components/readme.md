@@ -6,4 +6,6 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<APostItem>` | `<apost-item>` (components/APostItem.vue)
 - `<Logo>` | `<logo>` (components/Logo.vue)
+- `<PostItem>` | `<post-item>` (components/PostItem.vue)

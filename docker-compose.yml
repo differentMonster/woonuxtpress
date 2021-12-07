@@ -7,7 +7,7 @@ services:
     image: mysql:5.7
     restart: always
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${NUXTPRESS_MYSQL_ROOT_PASSWORD:-password}
       MYSQL_DATABASE: ${NUXTPRESS_DB_NAME:-wordpress}
@@ -37,7 +37,7 @@ services:
   # Wordpress
   nuxtpress.wp:
     container_name: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
-    image: wordpress:5.7.1-php7.4-apache
+    image: wordpress:5.8.2-php7.4-apache
     depends_on:
       - ${NUXTPRESS_MYSQL_CONTAINER:-nuxtpress.mysql}
     restart: always
@@ -58,24 +58,25 @@ services:
   # This is turned off by default
   # Nuxt spins up a development server much faster "npm run dev".
   # Switch back on production ready
-  nuxtpress.front:
-    container_name: ${NUXTPRESS_NUXT_CONTAINER:-nuxtpress.front}
-    image: node:12-slim
-    working_dir: '/var/www/nuxtpress-app'
-    ports:
-      - '${NUXTPRESS_NUXT_PORT:-3000}:3000'
-    volumes:
-      - ./frontend:/var/www/nuxtpress-app
-    environment:
-      HOST: 0.0.0.0
-      NUXTPRESS_WP_CONTAINER: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
-      NUXTPRESS_WP_URL: ${NUXTPRESS_WP_URL:-http://localhost:3080}
-      NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
-    command: bash -c "npm install && npm run dev"
-    networks:
-      - wpsite
+  # nuxtpress.front:
+  #   container_name: ${NUXTPRESS_NUXT_CONTAINER:-nuxtpress.front}
+  #   image: node:12-slim
+  #   working_dir: '/var/www/nuxtpress-app'
+  #   ports:
+  #     - '${NUXTPRESS_NUXT_PORT:-3000}:3000'
+  #   volumes:
+  #     - ./frontend:/var/www/nuxtpress-app
+  #   environment:
+  #     HOST: 0.0.0.0
+  #     NUXTPRESS_WP_CONTAINER: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
+  #     NUXTPRESS_WP_URL: ${NUXTPRESS_WP_URL:-http://localhost:3080}
+  #     NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
+  #   command: bash -c "npm install && npm run dev"
+  #   networks:
+  #     - wpsite
 
 networks:
   wpsite:
 volumes:
   db_data:
+  wp-content:

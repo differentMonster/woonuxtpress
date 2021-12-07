@@ -2,8 +2,8 @@
   {
     "name": "index",
     "path": "/",
-    "component": "/var/www/nuxtpress-app/pages/index.vue",
+    "component": "/home/monster/app/nuxt-press/frontend/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_4dd805ea"
+    "_name": "_22da855e"
   }
 ]

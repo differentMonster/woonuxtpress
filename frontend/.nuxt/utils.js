@@ -178,7 +178,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {}
+      env: {"NUXTPRESS_WP_URL":"http://localhost:3080"}
     }
     // Only set once
 
