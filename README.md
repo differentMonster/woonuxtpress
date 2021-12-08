@@ -56,3 +56,13 @@
     - users
     - _ns
     - options
+
+* DONE update Dockerlization wordpress
+  CLOSED: [2021-12-09 Thu 01:53]
+  - Note taken on [2021-12-09 Thu 01:51] \\
+    - WORDPRESS_DEBUG
+      original define('WP_DEBUG', false)
+      setting 1 will be true and 0 will be false
+
+    - WORDPRESS_TABLE_PREFIX
+      The default database table prefix for WordPress is 'wp_'; however, we recommend changing it. The reason for this is that all your login details are stored in your database, making your WordPress tables very popular targets for hackers.
