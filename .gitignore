@@ -8,6 +8,8 @@
 
 /frontend/node_modules
 
+/db_data
+
 # Nuxt generate
 dist
 
