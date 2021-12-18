@@ -1,4 +1,10 @@
-version: '3'
+version: '3.7'
+
+# networks:
+#   wordpress:
+#     ipam:
+#       config:
+#         - subnet: 172.25.0.0/16
 
 services:
   # Database
@@ -34,15 +40,17 @@ services:
     networks:
       - wpsite
 
-  # Wordpress
+  #Wordpress - Dockerfile BUILD
   nuxtpress.wp:
     container_name: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
-    image: wordpress:5.8.2-php7.4-apache
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile
     depends_on:
       - ${NUXTPRESS_MYSQL_CONTAINER:-nuxtpress.mysql}
-    restart: always
     ports:
       - '${NUXTPRESS_WP_PORT:-3080}:80'
+    restart: always
     volumes:
       - ./backend/wp-content:/var/www/html/wp-content
     environment:
@@ -66,6 +74,41 @@ services:
         include( ABSPATH . '.env.php' );
     networks:
       - wpsite
+
+
+  # Wordpress - Images BUILD
+  # nuxtpress.wp:
+  #   container_name: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
+  #   image: wordpress:5.8.2-php7.4-apache
+  #   depends_on:
+  #     - ${NUXTPRESS_MYSQL_CONTAINER:-nuxtpress.mysql}
+  #   restart: always
+  #   ports:
+  #     - '${NUXTPRESS_WP_PORT:-3080}:80'
+  #   volumes:
+  #     - ./backend/wp-content:/var/www/html/wp-content
+  #     # - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
+  #   environment:
+  #     NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
+  #     WORDPRESS_DB_HOST: ${NUXTPRESS_DB_HOST:-nuxtpress.mysql:3306}
+  #     WORDPRESS_DB_USER: ${NUXTPRESS_DB_USER:-xwordpress}
+  #     WORDPRESS_DB_PASSWORD: ${NUXTPRESS_DB_PASSWORD:-xwordpress}
+  #     WORDPRESS_DB_NAME: ${NUXTPRESS_DB_NAME:-wordpress}
+  #     WORDPRESS_TABLE_PREFIX: ${NUXTPRESS_TABLE_PREFIX:-np_}
+  #     WORDPRESS_DEBUG: ${NUXTPRESS_DEBUG:-1}
+  #     WORDPRESS_CONFIG_EXTRA: |
+  #       define( 'WP_HEADLESS_URL', '${NUXTPRESS_URL_FRONTEND:-http://localhost:3000}' );
+
+  #       define( 'WP_SITEURL', 'http://localhost:${NUXTPRESS_WP_PORT:-3080}' );
+  #       define( 'WP_HOME', 'http://localhost:${NUXTPRESS_WP_PORT:-3080}' );
+
+  #       define( 'DISALLOW_FILE_EDIT', true );
+  #       define( 'WP_DEBUG_DISPLAY', true );
+  #       define( 'WP_DEBUG_LOG', true );
+
+  #       include( ABSPATH . '.env.php' );
+  #   networks:
+  #     - wpsite
 
   # Nuxt2
   # This is turned off by default

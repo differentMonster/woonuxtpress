@@ -66,3 +66,8 @@
 
     - WORDPRESS_TABLE_PREFIX
       The default database table prefix for WordPress is 'wp_'; however, we recommend changing it. The reason for this is that all your login details are stored in your database, making your WordPress tables very popular targets for hackers.
+
+* DONE wordpress add user problem
+  CLOSED: [2021-12-18 Sat 22:30]
+  - Note taken on [2021-12-18 Sat 22:30] \\
+    - MailPoet Error : MailPoet requires a PDO_MYSQL PHP extention.
