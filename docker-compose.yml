@@ -71,6 +71,13 @@ services:
         define( 'WP_DEBUG_DISPLAY', true );
         define( 'WP_DEBUG_LOG', true );
 
+        # /* Multisite */
+        # define('WP_ALLOW_MULTISITE', true );
+
+        # /* JWT Authentication */
+        # define('JWT_AUTH_CORS_ENABLE', true);
+        # define('JWT_AUTH_SECRET_KEY', 'secret');
+
         include( ABSPATH . '.env.php' );
     networks:
       - wpsite
