@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-const wpUrl = process.env.NUXTPRESS_WP_URL ? process.env.NUXTPRESS_WP_URL : 'http://localhost:3080';
-
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     env: {
-        NUXTPRESS_WP_URL: wpUrl,
+        WOO_KEY: process.env.WOOCOMMERCE_KEY,
+        WOO_SECRET: process.env.WOOCOMMERCE_SECRET
     },
     head: {
         title: 'frontend',
@@ -36,7 +35,9 @@ export default {
     css: [],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [],
+    plugins: [
+        '~/plugins/woocomapi.js'
+    ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
@@ -47,19 +48,12 @@ export default {
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         '@nuxtjs/axios',
-        [
-            '~/modules/wp-api/index',
-            {
-                endpoint: `${wpUrl}/wp-json/`,
-            },
-        ],
-
     ],
-
     axios: {
         baseURL: 'http://localhost:3080',
-        proxyHeaders: false,
-        credentials: false
+        browserBaseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'http://[YOUR_HOST_IP_OR_DOMAIN]:5000'
+        // proxyHeaders: false,
+        // credentials: false
     },
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

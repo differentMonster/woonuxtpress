@@ -1,11 +1,5 @@
 {
-  "APostItem": {
-    "description": "Auto imported from components/APostItem.vue"
-  },
   "Logo": {
     "description": "Auto imported from components/Logo.vue"
-  },
-  "PostItem": {
-    "description": "Auto imported from components/PostItem.vue"
   }
 }

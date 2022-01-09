@@ -5,18 +5,18 @@ FROM node:12.11.1
 RUN apt-get update
 
 # copy / target Main Folder
-COPY . /opt/frontend
+COPY . /var/www/nuxtpress-app
 
 # work in folder
-WORKDIR /opt/frontend
+WORKDIR /var/www/nuxtpress-app
 
 # install dependency
-RUN npm install
+RUN npm install && npm run build
 
 # set app serving to permissive / assigned
-# ENV HOST 0.0.0.0
+ENV HOST 0.0.0.0
 
 # output port
-EXPOSE 3000
+# EXPOSE 3000
 
-CMD [ "npm", "run", "dev" ]
+# CMD [ "npm", "run", "dev" ]

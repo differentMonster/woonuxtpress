@@ -7,6 +7,18 @@ version: '3.7'
 #         - subnet: 172.25.0.0/16
 
 services:
+  # Nginx
+  # Load balance && reverse proxy for woocommerce by pass cross origin.
+  nginx:
+    build: ./nginx
+    ports:
+      - "5000:80"
+    depends_on:
+      - nuxtpress.front
+      - nuxtpress.wp
+    networks:
+      - wpsite
+
   # Database
   nuxtpress.mysql:
     container_name: ${NUXTPRESS_MYSQL_CONTAINER:-nuxtpress.mysql}
@@ -19,7 +31,7 @@ services:
       MYSQL_DATABASE: ${NUXTPRESS_DB_NAME:-wordpress}
       MYSQL_USER: ${NUXTPRESS_MYSQL_USER:-xwordpress}
       MYSQL_PASSWORD: ${NUXTPRESS_MYSQL_PASSWORD:-xwordpress}
-    # if switch to just using .env file
+    ## if switch to just using .env file
     # env_file:
     #   - ./env/db.env
     networks:
@@ -59,7 +71,7 @@ services:
       WORDPRESS_DB_USER: ${NUXTPRESS_DB_USER:-xwordpress}
       WORDPRESS_DB_PASSWORD: ${NUXTPRESS_DB_PASSWORD:-xwordpress}
       WORDPRESS_DB_NAME: ${NUXTPRESS_DB_NAME:-wordpress}
-      WORDPRESS_TABLE_PREFIX: ${NUXTPRESS_TABLE_PREFIX:-np_}
+      WORDPRESS_TABLE_PREFIX: ${NUXTPRESS_TABLE_PREFIX:-wnp_}
       WORDPRESS_DEBUG: ${NUXTPRESS_DEBUG:-1}
       WORDPRESS_CONFIG_EXTRA: |
         define( 'WP_HEADLESS_URL', '${NUXTPRESS_URL_FRONTEND:-http://localhost:3000}' );
@@ -71,79 +83,40 @@ services:
         define( 'WP_DEBUG_DISPLAY', true );
         define( 'WP_DEBUG_LOG', true );
 
-        # /* Multisite */
-        # define('WP_ALLOW_MULTISITE', true );
+        /* Multisite */
+        define('WP_ALLOW_MULTISITE', true );
 
-        # /* JWT Authentication */
-        # define('JWT_AUTH_CORS_ENABLE', true);
-        # define('JWT_AUTH_SECRET_KEY', 'secret');
+        /* JWT Authentication */
+        define('JWT_AUTH_CORS_ENABLE', true);
+        define('JWT_AUTH_SECRET_KEY', 'secret');
 
         include( ABSPATH . '.env.php' );
     networks:
       - wpsite
 
-
-  # Wordpress - Images BUILD
-  # nuxtpress.wp:
-  #   container_name: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
-  #   image: wordpress:5.8.2-php7.4-apache
-  #   depends_on:
-  #     - ${NUXTPRESS_MYSQL_CONTAINER:-nuxtpress.mysql}
-  #   restart: always
-  #   ports:
-  #     - '${NUXTPRESS_WP_PORT:-3080}:80'
-  #   volumes:
-  #     - ./backend/wp-content:/var/www/html/wp-content
-  #     # - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
-  #   environment:
-  #     NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
-  #     WORDPRESS_DB_HOST: ${NUXTPRESS_DB_HOST:-nuxtpress.mysql:3306}
-  #     WORDPRESS_DB_USER: ${NUXTPRESS_DB_USER:-xwordpress}
-  #     WORDPRESS_DB_PASSWORD: ${NUXTPRESS_DB_PASSWORD:-xwordpress}
-  #     WORDPRESS_DB_NAME: ${NUXTPRESS_DB_NAME:-wordpress}
-  #     WORDPRESS_TABLE_PREFIX: ${NUXTPRESS_TABLE_PREFIX:-np_}
-  #     WORDPRESS_DEBUG: ${NUXTPRESS_DEBUG:-1}
-  #     WORDPRESS_CONFIG_EXTRA: |
-  #       define( 'WP_HEADLESS_URL', '${NUXTPRESS_URL_FRONTEND:-http://localhost:3000}' );
-
-  #       define( 'WP_SITEURL', 'http://localhost:${NUXTPRESS_WP_PORT:-3080}' );
-  #       define( 'WP_HOME', 'http://localhost:${NUXTPRESS_WP_PORT:-3080}' );
-
-  #       define( 'DISALLOW_FILE_EDIT', true );
-  #       define( 'WP_DEBUG_DISPLAY', true );
-  #       define( 'WP_DEBUG_LOG', true );
-
-  #       /* Multisite */
-  #       define('WP_ALLOW_MULTISITE', true );
-
-  #       /* JWT Authentication */
-  #       define('JWT_AUTH_CORS_ENABLE', true);
-  #       define('JWT_AUTH_SECRET_KEY', 'secret');
-
-  #       include( ABSPATH . '.env.php' );
-  #   networks:
-  #     - wpsite
-
   # Nuxt2
   # This is turned off by default
   # Nuxt spins up a development server much faster "npm run dev".
   # Switch back on production ready
-  # nuxtpress.front:
-  #   container_name: ${NUXTPRESS_NUXT_CONTAINER:-nuxtpress.front}
-  #   image: node:12-slim
-  #   working_dir: '/var/www/nuxtpress-app'
-  #   ports:
-  #     - '${NUXTPRESS_NUXT_PORT:-3000}:3000'
-  #   volumes:
-  #     - ./frontend:/var/www/nuxtpress-app
-  #   environment:
-  #     HOST: 0.0.0.0
-  #     NUXTPRESS_WP_CONTAINER: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
-  #     NUXTPRESS_WP_URL: ${NUXTPRESS_WP_URL:-http://localhost:3080}
-  #     NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
-  #   command: bash -c "npm install && npm run dev"
-  #   networks:
-  #     - wpsite
+  # Set Woocommerce key and secret on .env
+  nuxtpress.front:
+    container_name: ${NUXTPRESS_NUXT_CONTAINER:-nuxtpress.front}
+    build:
+      context: ./frontend
+      dockerfile: docker/dev/Dockerfile
+    depends_on:
+      - nuxtpress.wp
+      - nuxtpress.mysql
+    environment:
+      NUXTPRESS_WP_CONTAINER: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
+      NUXTPRESS_WP_URL: ${NUXTPRESS_WP_URL:-http://localhost:3080}
+      NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
+      WOOCOMMERCE_KEY: ${WOOCOMMERCE_KEY}
+      WOOCOMMERCE_SECRET: ${WOOCOMMERCE_SECRET}
+    restart: always
+    command: bash -c "npm run dev"
+    networks:
+      - wpsite
 
 networks:
   wpsite:

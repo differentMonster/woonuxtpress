@@ -4,7 +4,9 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _22da855e = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _6c61708a = () => interopDefault(import('../pages/products.vue' /* webpackChunkName: "pages/products" */))
+const _2680ed7a = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
+const _4dd805ea = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -18,8 +20,16 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/products",
+    component: _6c61708a,
+    name: "products"
+  }, {
+    path: "/register",
+    component: _2680ed7a,
+    name: "register"
+  }, {
     path: "/",
-    component: _22da855e,
+    component: _4dd805ea,
     name: "index"
   }],
 
