@@ -127,3 +127,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
+
+define("IMH_ALLOW_PREFLIGHT_CORS",true); //required for method post

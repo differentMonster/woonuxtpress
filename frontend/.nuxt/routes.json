@@ -2,22 +2,22 @@
   {
     "name": "products",
     "path": "/products",
-    "component": "/var/www/nuxtpress-app/pages/products.vue",
+    "component": "/home/monster/app/woonuxtpress/frontend/pages/products.vue",
     "chunkName": "pages/products",
-    "_name": "_6c61708a"
+    "_name": "_661b5778"
   },
   {
     "name": "register",
     "path": "/register",
-    "component": "/var/www/nuxtpress-app/pages/register.vue",
+    "component": "/home/monster/app/woonuxtpress/frontend/pages/register.vue",
     "chunkName": "pages/register",
-    "_name": "_2680ed7a"
+    "_name": "_7a660592"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/var/www/nuxtpress-app/pages/index.vue",
+    "component": "/home/monster/app/woonuxtpress/frontend/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_4dd805ea"
+    "_name": "_6ce74e6e"
   }
 ]

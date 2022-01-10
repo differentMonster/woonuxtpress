@@ -14,6 +14,23 @@ if ( version_compare( $GLOBALS['wp_version'], '5.3', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 }
 
+add_action( 'init', 'handle_preflight' );
+function handle_preflight() {
+	$origin = get_http_origin();
+ 	if ( $origin == 'http://localhost:3000/' ) {
+		// You can set more specific domains if you need
+    	header("Access-Control-Allow-Origin: " . $origin);
+		header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+		header("Access-Control-Allow-Credentials: true");
+		header( 'Access-Control-Allow-Headers: Authorization' );
+
+		if ( 'OPTIONS' == $_SERVER['REQUEST_METHOD'] ) {
+			status_header(200);
+			exit();
+		}
+	}
+}
+
 if ( ! function_exists( 'twenty_twenty_one_setup' ) ) {
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

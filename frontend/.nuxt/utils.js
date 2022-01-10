@@ -178,7 +178,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"WOO_KEY":"ck_bd64ad5726c7be4ad27b4131742ce94e04d01017","WOO_SECRET":"cs_25b6d9389965f8b72735d92fc67bbc81fa274313"}
+      env: {}
     }
     // Only set once
 

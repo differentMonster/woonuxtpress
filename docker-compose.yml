@@ -9,15 +9,15 @@ version: '3.7'
 services:
   # Nginx
   # Load balance && reverse proxy for woocommerce by pass cross origin.
-  nginx:
-    build: ./nginx
-    ports:
-      - "5000:80"
-    depends_on:
-      - nuxtpress.front
-      - nuxtpress.wp
-    networks:
-      - wpsite
+  # nginx:
+  #   build: ./nginx
+  #   ports:
+  #     - "5000:80"
+  #   depends_on:
+  #     - nuxtpress.front
+  #     - nuxtpress.wp
+  #   networks:
+  #     - wpsite
 
   # Database
   nuxtpress.mysql:
@@ -99,24 +99,24 @@ services:
   # Nuxt spins up a development server much faster "npm run dev".
   # Switch back on production ready
   # Set Woocommerce key and secret on .env
-  nuxtpress.front:
-    container_name: ${NUXTPRESS_NUXT_CONTAINER:-nuxtpress.front}
-    build:
-      context: ./frontend
-      dockerfile: docker/dev/Dockerfile
-    depends_on:
-      - nuxtpress.wp
-      - nuxtpress.mysql
-    environment:
-      NUXTPRESS_WP_CONTAINER: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
-      NUXTPRESS_WP_URL: ${NUXTPRESS_WP_URL:-http://localhost:3080}
-      NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
-      WOOCOMMERCE_KEY: ${WOOCOMMERCE_KEY}
-      WOOCOMMERCE_SECRET: ${WOOCOMMERCE_SECRET}
-    restart: always
-    command: bash -c "npm run dev"
-    networks:
-      - wpsite
+  # nuxtpress.front:
+  #   container_name: ${NUXTPRESS_NUXT_CONTAINER:-nuxtpress.front}
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: docker/dev/Dockerfile
+  #   depends_on:
+  #     - nuxtpress.wp
+  #     - nuxtpress.mysql
+  #   environment:
+  #     NUXTPRESS_WP_CONTAINER: ${NUXTPRESS_WP_CONTAINER:-nuxtpress.wp}
+  #     NUXTPRESS_WP_URL: ${NUXTPRESS_WP_URL:-http://localhost:3080}
+  #     NUXTPRESS_WP_PORT: ${NUXTPRESS_WP_PORT:-3080}
+  #     WOOCOMMERCE_KEY: ${WOOCOMMERCE_KEY}
+  #     WOOCOMMERCE_SECRET: ${WOOCOMMERCE_SECRET}
+  #   restart: always
+  #   command: bash -c "npm run dev"
+  #   networks:
+  #     - wpsite
 
 networks:
   wpsite:
