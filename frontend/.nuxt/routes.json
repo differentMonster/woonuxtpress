@@ -2,9 +2,9 @@
   {
     "name": "products",
     "path": "/products",
-    "component": "/home/monster/app/woonuxtpress/frontend/pages/products.vue",
-    "chunkName": "pages/products",
-    "_name": "_661b5778"
+    "component": "/home/monster/app/woonuxtpress/frontend/pages/products/index.vue",
+    "chunkName": "pages/products/index",
+    "_name": "_43b663fb"
   },
   {
     "name": "register",
@@ -12,6 +12,13 @@
     "component": "/home/monster/app/woonuxtpress/frontend/pages/register.vue",
     "chunkName": "pages/register",
     "_name": "_7a660592"
+  },
+  {
+    "name": "products-id",
+    "path": "/products/:id",
+    "component": "/home/monster/app/woonuxtpress/frontend/pages/products/_id.vue",
+    "chunkName": "pages/products/_id",
+    "_name": "_43f32923"
   },
   {
     "name": "index",

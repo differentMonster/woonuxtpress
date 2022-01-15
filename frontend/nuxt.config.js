@@ -36,7 +36,9 @@ export default {
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-        '~/plugins/woocomapi.js'
+        '~/plugins/classWooCommerceOrigin.js',
+        '~/plugins/classWooCommerceCustomers.js',
+        '~/plugins/classWooCommerceProducts.js'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
@@ -51,7 +53,7 @@ export default {
     ],
     axios: {
         baseURL: 'http://localhost:3080',
-        browserBaseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'http://[YOUR_HOST_IP_OR_DOMAIN]:5000'
+        // browserBaseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : 'http://[YOUR_HOST_IP_OR_DOMAIN]:5000'
         // proxyHeaders: false,
         // credentials: false
     },

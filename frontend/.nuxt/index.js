@@ -14,7 +14,9 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 import nuxt_plugin_plugin_4f654d5a from 'nuxt_plugin_plugin_4f654d5a' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_axios_ae45a120 from 'nuxt_plugin_axios_ae45a120' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_woocomapi_0402761d from 'nuxt_plugin_woocomapi_0402761d' // Source: ../plugins/woocomapi.js (mode: 'all')
+import nuxt_plugin_classWooCommerceOrigin_a346f0fe from 'nuxt_plugin_classWooCommerceOrigin_a346f0fe' // Source: ../plugins/classWooCommerceOrigin.js (mode: 'all')
+import nuxt_plugin_classWooCommerceCustomers_a1c815dc from 'nuxt_plugin_classWooCommerceCustomers_a1c815dc' // Source: ../plugins/classWooCommerceCustomers.js (mode: 'all')
+import nuxt_plugin_classWooCommerceProducts_67d10efa from 'nuxt_plugin_classWooCommerceProducts_67d10efa' // Source: ../plugins/classWooCommerceProducts.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -182,8 +184,16 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_axios_ae45a120(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_woocomapi_0402761d === 'function') {
-    await nuxt_plugin_woocomapi_0402761d(app.context, inject)
+  if (typeof nuxt_plugin_classWooCommerceOrigin_a346f0fe === 'function') {
+    await nuxt_plugin_classWooCommerceOrigin_a346f0fe(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_classWooCommerceCustomers_a1c815dc === 'function') {
+    await nuxt_plugin_classWooCommerceCustomers_a1c815dc(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_classWooCommerceProducts_67d10efa === 'function') {
+    await nuxt_plugin_classWooCommerceProducts_67d10efa(app.context, inject)
   }
 
   // Lock enablePreview in context

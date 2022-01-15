@@ -26,8 +26,8 @@
 
 <script>
     import {
-        createWooComCustomer
-    } from '@/plugins/woocomapi.js'
+        WooCommerceCustomers
+    } from '@/plugins/classWooCommerceCustomers.js'
     export default {
         data() {
             return {
@@ -37,13 +37,15 @@
             }
         },
         methods: {
-            async registerUsers() {
-                await createWooComCustomer(this.email, this.username, this.password).then((response) => {
-                    console.log(respons)
-                }).catch((e) => {
-                    throw new Error('failure create customer')
+            registerUsers() {
+                const WooComCustomers = new WooCommerceCustomers(this.email, this.username, this.password)
+                // import class create with failure return from it.
+                WooComCustomers.create().then((response) => {
+                    console.log(response[1])
+                }).catch((error) => {
+                    console.log(error)
                 })
-            },
+            }
         },
         mounted() {}
     }

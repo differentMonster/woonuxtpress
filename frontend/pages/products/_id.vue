@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="product_container">
-            <h1>Products Pages</h1>
+            <h1>Product Pages</h1>
             <div v-for="product in products" :key="product.id">
                 <div class="product--images">
                 </div>
@@ -20,8 +20,8 @@
 
 <script>
     import {
-        fetchWooComProducts,
-    } from "@/plugins/woocomapi.js";
+        WooCommerceProducts
+    } from "@/plugins/classWooCommerceProducts.js";
 
     export default {
         data() {
@@ -30,16 +30,18 @@
             }
         },
         methods: {
-            async getProducts() {
-                await fetchWooComProducts().then((response) => {
-                    this.products = response.data
-                }).catch((e) => {
-                    throw new Error('get products, please try again')
+            getProduct() {
+                const WooComProducts = new WooCommerceProducts()
+                WooComProducts.getProduct(this.$route.params.id).then((response) => {
+                    this.products = response
+                    console.log(response)
+                }).catch((error) => {
+                    console.log(error)
                 })
-            },
+            }
         },
         mounted() {
-            this.getProducts()
+            this.getProduct()
         }
     }
 </script>
