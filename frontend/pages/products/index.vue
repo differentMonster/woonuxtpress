@@ -4,6 +4,8 @@
             <h1>Products Pages</h1>
             <div v-for="product in products" :key="product.id">
                 <div class="product--images">
+                    <img alt="" :src="`${product.images[0].src}`" />
+                    <img alt="" :src="`${product.images[1].src}`" />
                 </div>
                 <div class="product--info">
                     {{ product.name }}</br>
@@ -14,7 +16,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -26,7 +27,7 @@
     export default {
         data() {
             return {
-                products: []
+                products: {}
             }
         },
         methods: {

@@ -2,8 +2,9 @@
     <div>
         <div class="product_container">
             <h1>Product Pages</h1>
-            <div v-for="product in products" :key="product.id">
-                <div class="product--images">
+            <div>
+                <div class="product--images" v-for="image in product.images">
+                    <img alt="" :src="`${image.src}`" />
                 </div>
                 <div class="product--info">
                     {{ product.name }}</br>
@@ -14,7 +15,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -26,15 +26,15 @@
     export default {
         data() {
             return {
-                products: []
+                product: {}
             }
         },
         methods: {
             getProduct() {
                 const WooComProducts = new WooCommerceProducts()
                 WooComProducts.getProduct(this.$route.params.id).then((response) => {
-                    this.products = response
-                    console.log(response)
+                    this.product = response[0]
+                    console.log(response[1])
                 }).catch((error) => {
                     console.log(error)
                 })
@@ -47,5 +47,15 @@
 </script>
 
 <style>
+    .product_container {
+        width: 100%;
+        text-align: center;
+        position: relative;
+        margin-top: 100px;
+    }
 
+    .product--images img {
+        width: 500px;
+        height: 670px;
+    }
 </style>

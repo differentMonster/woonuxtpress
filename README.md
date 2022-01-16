@@ -14,6 +14,8 @@
 * DONE add CORS into wordpress
   CLOSED: [2022-01-16 Sun 04:59]
 
+* [#D] remove or disable class-wp-rest-api plugin
+
 # Woocommerce
 
 * logs
